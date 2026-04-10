@@ -22,10 +22,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-bfd93v&3d8y^v$9h0pn0082hpxuy5c8zl2nzvxpo=@kzjh&86e'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# CAMBIO: Desactivar Debug y configurar Hosts permitidos
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['tienda.pythonanywhere.com']
 
 
 # Application definition
@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-es'
 
 TIME_ZONE = 'UTC'
 
@@ -121,4 +121,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+
+# AÑADIR: Ruta donde se recolectarán los archivos estáticos (CSS, JS, imágenes)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
