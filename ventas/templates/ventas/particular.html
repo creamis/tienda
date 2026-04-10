@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange - Tarifas Particular</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Logo" style="width: 80px;">
+            <h1>Tarifas Particular</h1>
+            <p>Listado de ofertas vigentes para clientes residenciales</p>
+        </header>
+
+        <main style="margin-top: 50px;">
+            <div class="selection-grid-particular">
+                <a href="{% url 'fibra_movil' %}" class="btn-orange">FIBRA + MÓVIL</a>
+                <a href="#" class="btn-orange">TV + FIBRA + MÓVIL</a>
+                <a href="{% url 'solo_mov_url' %}" class="btn-orange">GO</a>
+            </div>
+            <div style="margin-top: 30px;">
+                <p>Selecciona una opción para ver las tarifas detalladas.</p>
+            </div>
+            <br>
+            <a href="{% url 'home' %}" class="btn-back">Volver al inicio</a>
+        </main>
+    </div>
+
+    <style>
+        /* Estilos generales */
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
+
+        /* Estilos para los botones de selección */
+        .selection-grid-particular {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .tarifas-placeholder { border: 2px dashed #ccc; padding: 40px; color: #666; }
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #FF7900;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-back:hover { text-decoration: underline; color: #000; }
+        /* Estilos del botón naranja (reutilizados del home) */
+        .btn-orange {
+            background-color: #FF7900;
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.2rem;
+        }
+        .btn-orange:hover { background-color: #000; }
+    </style>
+</body>
+</html>

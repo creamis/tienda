@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange - Pasos de Venta en Tienda</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 40px; }
+        .container-tienda { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #FF7900; border-bottom: 2px solid #FF7900; padding-bottom: 10px; }
+        .step { margin-bottom: 25px; padding-left: 20px; border-left: 4px solid #000; }
+        .step h2 { margin: 0 0 10px 0; font-size: 1.3rem; color: #333; }
+        .step p { margin: 0; color: #666; line-height: 1.5; }
+        .back-link { display: inline-block; margin-top: 30px; color: #FF7900; text-decoration: none; font-weight: bold; }
+        .back-link:hover { text-decoration: underline; }
+        .icon-badge { background: #FF7900; color: white; padding: 5px 10px; border-radius: 4px; font-size: 0.8rem; margin-bottom: 5px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="container-tienda">
+        <header>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Logo" style="width: 50px; margin-bottom: 10px;">
+            <h1>Protocolo de Atención en Tienda</h1>
+        </header>
+
+        <div class="step">
+            <div class="icon-badge">PASO 1</div>
+            <h2>Acogida y Bienvenida</h2>
+            <p>Saludar al cliente con una sonrisa, contacto visual y frase de bienvenida oficial ("Bienvenido a Orange").</p>
+            <p><strong>Buenos Dias/Tardes soy Miguel, en que puedo ayudarte?</strong></p>
+        </div>
+
+        <div class="step">
+            <div class="icon-badge">PASO 2</div>
+            <h2>Sondeo (Descubrimiento de necesidades)</h2>
+            <p>Realizar preguntas abiertas para entender qué servicios tiene actualmente y qué busca mejorar (¿Cuántas líneas tiene?, ¿Qué uso hace de los datos?, ¿Tiene televisión?).</p>
+            <p><strong>Si ya es cliente Orange, fibra en casa, fibra 2ª vivienda, lineas adicionales, renove (x3), dispositivo mejora de cobertura, No olvidar Orange Energia!!!.</strong></p>
+        </div>
+
+        <div class="step">
+            <div class="icon-badge">PASO 3</div>
+            <h2>Asesoramiento y Propuesta</h2>
+            <p>Presentar la tarifa que mejor se adapte a su perfil (Particular o Empresa) basándonos en el sondeo previo, destacando el ahorro o la mejora de servicio.</p>
+            <p><strong>Paquetizar precio con Orange energia -6€ en factura en los servicios a contratar.</strong></p>
+            <p><strong>Preguntar al cliente que le parece la oferta, si no es conforme ofrecer Jazztel siempre.</strong></p>
+            <p><strong>Paquetizar precio con Jazztel energia -6€ en factura en los servicios a contratar.</strong></p>
+
+        </div>
+
+        <div class="step">
+            <div class="icon-badge">PASO 4</div>
+            <h2>Cierre y Despedida</h2>
+            <p>Confirmar la contratación, resolver dudas finales y asegurar que el cliente conoce los siguientes pasos de su instalación o activación.</p>
+        </div>
+
+        <a href="{% url 'home' %}" class="back-link">← Volver al inicio</a>
+    </div>
+</body>
+</html>

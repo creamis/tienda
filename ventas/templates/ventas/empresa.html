@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange - Tarifas Empresa</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Logo" style="width: 80px;">
+            <h1>Tarifas Empresa</h1>
+            <p>Ofertas exclusivas para Autónomos y Negocios</p>
+        </header>
+
+        <main style="margin-top: 50px;">
+            <div class="tarifas-placeholder">
+                <p>Aquí aparecerán las tarifas de Empresa...</p>
+            </div>
+            <br>
+            <a href="{% url 'home' %}" class="btn-back">Volver al inicio</a>
+        </main>
+    </div>
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
+        .tarifas-placeholder { border: 2px dashed #ccc; padding: 40px; color: #666; }
+        .btn-back {
+            display: inline-block;
+            margin-top: 20px;
+            color: #FF7900;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .btn-back:hover { text-decoration: underline; }
+    </style>
+</body>
+</html>

@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange - Fibra y Móvil</title>
+    <style>
+        :root { --orange: #FF7900; --black: #000000; --gray: #f4f4f4; }
+        body { font-family: 'Helvetica', Arial, sans-serif; margin: 0; padding: 40px; background-color: white; color: var(--black); }
+        header { text-align: center; margin-bottom: 50px; }
+        .logo { width: 60px; margin-bottom: 10px; }
+        
+        .grid-tarifas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card-tarifa {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .card-tarifa:hover { border-color: var(--orange); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        .tag { background: var(--black); color: white; font-size: 0.7rem; padding: 4px 8px; border-radius: 4px; width: fit-content; margin-bottom: 10px; }
+        .title { font-size: 1.5rem; font-weight: bold; margin-bottom: 15px; }
+        
+        .feature { display: flex; align-items: center; margin-bottom: 10px; font-size: 0.95rem; }
+        .feature-icon { color: var(--orange); margin-right: 10px; font-weight: bold; }
+
+        .price-container { margin-top: auto; padding-top: 20px; border-top: 1px solid #eee; }
+        .price { font-size: 2rem; font-weight: bold; }
+        .price span { font-size: 1rem; color: #666; }
+
+        .btn-back { display: block; text-align: center; margin-top: 40px; color: var(--orange); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange" class="logo">
+        <h1>Tarifas Fibra + 1 Línea Móvil</h1>
+    </header>
+
+    <main class="grid-tarifas">
+        {% for tariff in tariffs %}
+        <div class="card-tarifa" {% if tariff.highlight %}style="border-width: 2px; border-color: var(--orange);"{% endif %}>
+            <div class="tag" {% if tariff.highlight %}style="background: var(--orange);"{% endif %}>
+                {{ tariff.tag }}
+            </div>
+            <div class="title">{{ tariff.title }}</div>
+            {% for feature in tariff.features %}
+            <div class="feature"><span class="feature-icon">✓</span> {{ feature }}</div>
+            {% endfor %}
+            <div class="price-container">
+                <div class="price">{{ tariff.price }} <span>/mes</span></div>
+            </div>
+        </div>
+        {% endfor %}
+    </main>
+
+    <a href="{% url 'particular' %}" class="btn-back">← Volver a categorías</a>
+</body>
+</html>

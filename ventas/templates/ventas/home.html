@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange - Selección de Cliente</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Orange_logo.svg" alt="Orange Logo" style="width: 80px;">
+            <h1>Gestión de Ventas</h1>
+            <p>Selecciona el perfil del cliente</p>
+        </header>
+
+        <main style="display: flex; gap: 20px; justify-content: center; margin-top: 50px;">
+            <a href="{% url 'particular' %}" class="btn-orange">PARTICULAR</a>
+            <a href="{% url 'empresa' %}" class="btn-orange">EMPRESA</a>
+            <a href="{% url 'tienda' %}" class="btn-orange">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 10px;">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                TIENDA
+            </a>
+        </main>
+    </div>
+
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 100px; }
+        .btn-orange {
+            background-color: #FF7900;
+            color: white;
+            padding: 20px 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .btn-orange:hover { background-color: #000; }
+    </style>
+</body>
+</html>
