@@ -1,0 +1,20 @@
+name: Auditar imágenes Orange
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  auditar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ejecutar auditoría pública
+        run: python3 herramientas/imagenes_orange/extractor.py
+      - name: Guardar informes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-imagenes-orange
+          path: informes_imagenes/
+          if-no-files-found: warn
