@@ -1,5 +1,10 @@
 name: Auditar imágenes Orange
 on:
+  push:
+    branches: [herramienta-imagenes-orange]
+    paths:
+      - 'herramientas/imagenes_orange/**'
+      - '.github/workflows/imagenes_orange.yml'
   workflow_dispatch:
 permissions:
   contents: read
