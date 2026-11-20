@@ -20,7 +20,7 @@ if start<0:sys.exit('ERROR: bloque de accesorios no encontrado; sin modificar na
 start+=len(start_tag)
 end=s.find('</script>',start)
 if end<0:sys.exit('ERROR: cierre del bloque de accesorios no encontrado; sin modificar nada')
-accessories=json.loads(m.group(1))
+accessories=json.loads(s[start:end])
 for i,x in enumerate(accessories):
  rows.append({'tipo':'accesorio','id':str(i),'nombre':str(x.get('nombre','')),'marca':str(x.get('marca','')),'categoria':str(x.get('tipo','')),'imagen_actual':str(x.get('imagen_url') or '')})
 path=out/'inventario_real_completo.csv'
