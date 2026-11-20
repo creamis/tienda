@@ -10,7 +10,9 @@ import django
 django.setup()
 from django.conf import settings
 from django.db import transaction
-from crm.models import Dispositivo,PrecioRenove,Promocion,Tarifa
+from crm.models import Dispositivo,PrecioRenove
+Promocion=PrecioRenove._meta.get_field('promocion').remote_field.model
+Tarifa=PrecioRenove._meta.get_field('tarifa').remote_field.model
 # Fuente: VaP renove (NUEVAS TARIFAS), filas 406,1118,1831,2544;
 # cuotas CON IVA columnas F,H,J,L,N,P,R,T,V,X,Z,AB,AD,AF,AH,AJ.
 tarifas=[24,25,5,6,3,20,21,22,9,26,27,28,29,14,30,31]
