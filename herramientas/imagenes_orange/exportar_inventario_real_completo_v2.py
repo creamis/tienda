@@ -14,8 +14,12 @@ for d in Dispositivo.objects.all().order_by('marca','modelo','capacidad'):
 n_devices=len(rows)
 p=root/'crm/templates/crm/renove_particular.html'
 s=p.read_text(encoding='utf-8')
-m=re.search(r'<script\\b[^>]*\\bid=["\\\']renove-segunda-venta["\\\'][^>]*>(.*?)</script\\s*>',s,re.I|re.S)
-if not m:sys.exit('ERROR: bloque de accesorios no encontrado; sin modificar nada')
+start_tag='<script id="renove-segunda-venta" type="application/json">'
+start=s.find(start_tag)
+if start<0:sys.exit('ERROR: bloque de accesorios no encontrado; sin modificar nada')
+start+=len(start_tag)
+end=s.find('</script>',start)
+if end<0:sys.exit('ERROR: cierre del bloque de accesorios no encontrado; sin modificar nada')
 accessories=json.loads(m.group(1))
 for i,x in enumerate(accessories):
  rows.append({'tipo':'accesorio','id':str(i),'nombre':str(x.get('nombre','')),'marca':str(x.get('marca','')),'categoria':str(x.get('tipo','')),'imagen_actual':str(x.get('imagen_url') or '')})
