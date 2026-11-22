@@ -1,5 +1,11 @@
 name: Diagnostico catalogo imagenes Orange V5.6
 on:
+  push:
+    branches:
+      - feature/orange-catalogo-imagenes-v56
+    paths:
+      - '.github/workflows/diagnostico-imagenes-orange-v56.yml'
+      - 'herramientas_orange/extraer_catalogo_orange.py'
   workflow_dispatch:
 
 permissions:
