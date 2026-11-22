@@ -4,6 +4,7 @@ import csv
 import json
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from collections import OrderedDict
 from pathlib import Path
 from urllib.parse import urlencode, urljoin, urlparse, parse_qs
@@ -97,22 +98,31 @@ for category in CATEGORIES:
         print(f"{category}: ERROR {exc}")
     time.sleep(0.5)
 
-# Check only a small pilot. No image bytes are saved.
-checked = 0
-for row in ROWS.values():
-    if not row["imagen_url"] or checked >= 10:
-        continue
-    checked += 1
+# Validate all URLs concurrently. Read only HTTP headers; never save image bytes.
+def check_image(row):
+    if not row["imagen_url"]:
+        return row["id"], "sin_url"
     try:
-        r = SESSION.get(row["imagen_url"], timeout=TIMEOUT, stream=True,
-                        headers={"Range": "bytes=0-1023"})
-        content_type = r.headers.get("Content-Type", "").split(";")[0].lower()
-        row["estado_imagen"] = ("ok" if r.status_code in (200, 206)
-                                 and content_type.startswith("image/") else
-                                 f"no_valida_http_{r.status_code}_{content_type}")
-        r.close()
+        response = requests.get(row["imagen_url"], timeout=12, stream=True,
+                                headers={"Range": "bytes=0-1023",
+                                         "User-Agent": "Mozilla/5.0"})
+        mime = response.headers.get("Content-Type", "").split(";")[0].lower()
+        status = response.status_code
+        response.close()
+        if status in (200, 206) and mime.startswith("image/"):
+            return row["id"], "ok"
+        return row["id"], f"no_valida_http_{status}_{mime}"
     except requests.RequestException as exc:
-        row["estado_imagen"] = "error_" + type(exc).__name__
+        return row["id"], "error_" + type(exc).__name__
+
+with ThreadPoolExecutor(max_workers=12) as pool:
+    futures = [pool.submit(check_image, row) for row in ROWS.values()]
+    for future in as_completed(futures):
+        device_id, status = future.result()
+        ROWS[device_id]["estado_imagen"] = status
+checked = sum(bool(row["imagen_url"]) for row in ROWS.values())
+valid = sum(row["estado_imagen"] == "ok" for row in ROWS.values())
+print(f"VALIDACION: {valid}/{checked} URLs HTTP imagen correctas")
 
 columns = ["categoria", "id", "nombre", "imagen_url", "ficha_url", "estado_imagen"]
 with (OUT / "catalogo_orange.csv").open("w", encoding="utf-8-sig", newline="") as f:
